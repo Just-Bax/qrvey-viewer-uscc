@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>qrvey-viewer</title>
+    <style>
+        .kpi-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+            background-color: lavender;
+            padding: 10px;
+        }
+        .kpi-container > div {
+            height: 200px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const domain = `https://${params.get("subdomain")}.qrveyapp.com`;
+        const token = params.get("token");
+        const app_id = params.get("app_id");
+        const dashboard_id = params.get("dashboard_id");
+
+        window['config'] = {
+            domain: domain, qv_token: token, 
+            dashboard_id: dashboard_id, app_id: app_id, 
+            personalization: { enabled: true, add_filter: true, edit_page: true, edit_chart: true }, 
+            "filter_panel_default_view": "closed", 
+        };
+
+        dashboard = document.createElement("qrvey-end-user");
+        dashboard.setAttribute("settings", "config");
+        document.body.append(dashboard);
+    </script>
+    <script type="text/javascript" src="https://d3a4lhgk15l3c7.cloudfront.net/widgets-launcher/app.js?7.5.202309200058"></script>
+</body>
+</html>
